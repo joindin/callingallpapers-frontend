@@ -2,9 +2,12 @@
   "name": "@callingallpapers/cap-web",
   "private": true,
   "scripts": {
-    "dev": "parcel serve"
+    "dev": "parcel serve",
+    "build": "parcel build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lit": "^3.0.2"
+  },
   "devDependencies": {
     "parcel": "^2.10.3"
   },
