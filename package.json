@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "parcel serve",
-    "build": "parcel build"
+    "build": "parcel build",
+    "lint": "eslint",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "lit": "^3.0.2"
