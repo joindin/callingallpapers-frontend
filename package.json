@@ -1,6 +1,12 @@
 {
   "name": "@callingallpapers/cap-web",
   "private": true,
+  "scripts": {
+    "dev": "parcel serve"
+  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  },
+  "packageManager": "yarn@4.0.0"
 }
