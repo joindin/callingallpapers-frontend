@@ -166,6 +166,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.4.2"
     "@lit/task": "npm:^1.0.0"
     "@parcel/packager-raw-url": "npm:^2.10.3"
+    "@parcel/reporter-bundle-analyzer": "npm:^2.10.3"
     "@parcel/transformer-sass": "npm:^2.10.3"
     "@parcel/transformer-webmanifest": "npm:^2.10.3"
     "@popperjs/core": "npm:^2.11.8"
@@ -820,6 +821,17 @@ __metadata:
     "@parcel/events": "npm:2.10.3"
     chrome-trace-event: "npm:^1.0.2"
   checksum: e73cd06c99c501cd9b546b6f86e06f148224c3d8f8d4f74f235d34171d57b277d054f9fdb0ce8717c84e7c1bbe6cf4054cfb138bcc473f67f2e94a5ec70a2e9f
+  languageName: node
+  linkType: hard
+
+"@parcel/reporter-bundle-analyzer@npm:^2.10.3":
+  version: 2.10.3
+  resolution: "@parcel/reporter-bundle-analyzer@npm:2.10.3"
+  dependencies:
+    "@parcel/plugin": "npm:2.10.3"
+    "@parcel/utils": "npm:2.10.3"
+    nullthrows: "npm:^1.1.1"
+  checksum: 2c630c7298614ae9fc9d5c76c4f9a9cbd91e2f20921aa7e1564e82ef10424eba23159fba7cfde8f3668fd80bf963c761ecbfae9df69608e0453d5aaf2e7b3201
   languageName: node
   linkType: hard
 

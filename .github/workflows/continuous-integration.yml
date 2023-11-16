@@ -1,0 +1,64 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request: ~
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository using git
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        uses: ./.github/actions/yarn-nm-install
+        with:
+          enable-corepack: true
+          cache-node-modules: true
+          cache-install-state: true
+      - name: Run type-check
+        shell: "bash"
+        run: yarn run type-check
+
+  format-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository using git
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        uses: ./.github/actions/yarn-nm-install
+        with:
+          enable-corepack: true
+          cache-node-modules: true
+          cache-install-state: true
+      - name: Run format-check
+        shell: "bash"
+        run: yarn run format-check
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository using git
+        uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        uses: ./.github/actions/yarn-nm-install
+        with:
+          enable-corepack: true
+          cache-node-modules: true
+          cache-install-state: true
+      - name: Run build
+        shell: "bash"
+        run: yarn run build
