@@ -1,3 +1,4 @@
+import './boot/bootstrap';
 import './boot/fontawesome';
 import './components/cfp-filter';
 import { CfpFilter } from './components/cfp-filter';

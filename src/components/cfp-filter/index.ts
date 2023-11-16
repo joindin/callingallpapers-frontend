@@ -15,7 +15,7 @@ export class CfpFilter extends LitElement {
     return html`
       <form class="d-flex" role="search">
         <input
-          class="form-control me-2"
+          class="form-control"
           type="search"
           placeholder="Filter"
           aria-label="Filter"
