@@ -4,7 +4,7 @@ import { Cfp } from '../../types';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { Tooltip } from 'bootstrap';
-import { css, html, LitElement, svg } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators';
 // @ts-ignore
 import noLogoImg from 'url:./assets/none.gif?width=90';
@@ -64,8 +64,8 @@ export class CfpItem extends LitElement {
             <div class="d-block d-sm-flex media-left">
               <div class="flex-shrink-0${(!this.data.iconUri && ' d-none d-sm-block') || ''}">
                 <a href="${this.data.eventUri}">
-                  ${(this.data.iconUri && html` <img src="${this.data.iconUri}" class="media-object" /> `) ||
-                  html` <img src="${noLogoImg}" class="media-object" /> `}
+                  ${(this.data.iconUri && html` <img alt="" src="${this.data.iconUri}" class="media-object" /> `) ||
+                  html` <img alt="" src="${noLogoImg}" class="media-object" /> `}
                 </a>
               </div>
               <div class="flex-grow-1 ms-sm-3 media-body">
@@ -116,6 +116,6 @@ export class CfpItem extends LitElement {
     if (!this.data) {
       return '';
     }
-    return `http://www.openstreetmap.org?mlat=${this.data.latitude}&mlon=${this.data.longitude}#map=5/${this.data.latitude}/${this.data.longitude}`;
+    return `//www.openstreetmap.org?mlat=${this.data.latitude}&mlon=${this.data.longitude}#map=5/${this.data.latitude}/${this.data.longitude}`;
   }
 }
