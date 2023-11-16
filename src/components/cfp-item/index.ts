@@ -24,7 +24,7 @@ export class CfpItem extends LitElement {
       documentStyles(),
       fontawesomeStyles(),
       css`
-        @media (max-width: 480px) {
+        @media (max-width: 575px) {
           .media-left {
             display: block;
             margin-bottom: 0.5em;
@@ -35,7 +35,7 @@ export class CfpItem extends LitElement {
             width: 100%;
           }
         }
-        @media (min-width: 481px) {
+        @media (min-width: 576px) {
           .media-left .media-object {
             max-width: 90px;
             max-height: 90px;
@@ -61,14 +61,14 @@ export class CfpItem extends LitElement {
       ${(this.data &&
         html`
           <li class="list-group-item mb-2">
-            <div class="d-flex media-left">
-              <div class="flex-shrink-0">
+            <div class="d-block d-sm-flex media-left">
+              <div class="flex-shrink-0${(!this.data.iconUri && ' d-none d-sm-block') || ''}">
                 <a href="${this.data.eventUri}">
                   ${(this.data.iconUri && html` <img src="${this.data.iconUri}" class="media-object" /> `) ||
                   html` <img src="${noLogoImg}" class="media-object" /> `}
                 </a>
               </div>
-              <div class="flex-grow-1 ms-3 media-body">
+              <div class="flex-grow-1 ms-sm-3 media-body">
                 <h5 class="media-heading">
                   <a href="${this.data.uri}">${this.data.name}</a>
                   <span
