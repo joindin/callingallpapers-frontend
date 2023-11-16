@@ -1,0 +1,46 @@
+version: '3.8'
+
+x-service-templates:
+  app: &app
+    image: juitde/node:20.8
+    working_dir: "$DOCKER_WEBROOT"
+    volumes:
+      - "$PROJECT_ROOT/:$DOCKER_WEBROOT/"
+
+x-global-config:
+  APP_EXPOSED_PORT: &app_exposed_port 1234
+
+services:
+  www:
+    image: nginx:1.25-alpine
+    restart: unless-stopped
+    expose:
+      - 80/tcp
+    depends_on:
+      app:
+        condition: service_started
+    labels:
+      - dev.orbstack.domains=*.${COMPOSE_PROJECT_NAME}.local,${COMPOSE_PROJECT_NAME}.local
+    environment:
+      DOLLAR_SIGN: "$"
+      DOMAIN_NAME: "${COMPOSE_PROJECT_NAME}.local"
+      APP_PORT: *app_exposed_port
+    volumes:
+      - "$PROJECT_DEVROOT/docker/services/www/nginx.conf:/etc/nginx/templates/default.conf.template:ro"
+
+  app:
+    <<: *app
+    restart: unless-stopped
+    expose:
+      - *app_exposed_port
+    depends_on:
+      app.install-dependencies:
+        condition: service_completed_successfully
+    environment:
+      PORT: *app_exposed_port
+    command: "yarn run dev"
+
+  app.install-dependencies:
+    <<: *app
+    restart: no
+    command: "yarn install --immutable"

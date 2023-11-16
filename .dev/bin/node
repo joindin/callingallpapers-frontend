@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+me=$(basename "$0")
+CONTAINER="${APP:-app}.install-dependencies"
+CURRENT_PATH="$(pwd)"
+EXECUTABLE="${me}"
+
+ESCAPED_PROJECT_ROOT="${PROJECT_ROOT//\//\\/}"
+ESCAPED_DOCKER_WEBROOT="${DOCKER_WEBROOT//\//\\/}"
+
+DOCKER_CURRENT_PATH="${CURRENT_PATH/${ESCAPED_PROJECT_ROOT}/${ESCAPED_DOCKER_WEBROOT}}"
+DOCKER_CURRENT_PATH="${DOCKER_CURRENT_PATH//\\/}"
+
+echo "running_in_docker ($CONTAINER):"
+
+docker-compose \
+    run \
+    --no-deps \
+    --rm \
+    --remove-orphans \
+    -w "${DOCKER_CURRENT_PATH}" \
+    "${CONTAINER}" \
+    $EXECUTABLE \
+        "${@}"
