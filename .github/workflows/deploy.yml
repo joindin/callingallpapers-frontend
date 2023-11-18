@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,11 +18,27 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      - run: yarn install
-      - run: yarn build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Install
+        uses: ./.github/actions/yarn-nm-install
         with:
-          folder: dist
-          tag: "Relese_${{ env.NOW }}"
+          enable-corepack: true
+          cache-node-modules: true
+          cache-install-state: true
+      - name: Build
+        shell: "bash"
+        run: yarn run build
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "./dist/"
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
